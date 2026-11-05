@@ -135,5 +135,102 @@ function initCopy() {
   });
 }
 
+// ---------- motion helpers ----------
+
+export const reduceMotion = () => Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches);
+
+const REVEAL_SELECTOR = '.eyebrow, .display-2, .section-lede, .m-card, .topic, .tool, .console, .card, .brief, .prose > *, .about-art, .footer-grid > *';
+let revealObserver;
+
+/**
+ * Fade/slide things in as they scroll into view. Only elements that start below the
+ * fold are hidden, so nothing visible ever blinks. Call again after inserting content.
+ */
+export function revealIn(root = document) {
+  if (reduceMotion() || !('IntersectionObserver' in window)) return;
+  revealObserver ||= new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        const el = e.target;
+        revealObserver.unobserve(el);
+        el.classList.add('is-visible');
+        // Hand back to the normal hover transitions once the entrance is over.
+        setTimeout(() => el.classList.remove('reveal', 'is-visible'), 900 + (parseInt(el.style.getPropertyValue('--d'), 10) || 0));
+      }
+    },
+    { rootMargin: '0px 0px -6% 0px', threshold: 0.06 }
+  );
+  const fold = window.innerHeight * 0.92;
+  const perParent = new Map();
+  for (const el of root.querySelectorAll(REVEAL_SELECTOR)) {
+    if (el.dataset.revealed || el.closest('.hero')) continue;
+    el.dataset.revealed = '1';
+    if (el.getBoundingClientRect().top < fold) continue; // already on screen
+    const i = perParent.get(el.parentElement) || 0;
+    perParent.set(el.parentElement, i + 1);
+    el.style.setProperty('--d', `${Math.min(i, 6) * 90}ms`); // siblings arrive one after another
+    el.classList.add('reveal');
+    revealObserver.observe(el);
+  }
+}
+
+/** Run `fn` once, the first time `el` is on screen. */
+export function whenVisible(el, fn) {
+  if (!el) return;
+  if (!('IntersectionObserver' in window)) return fn();
+  const io = new IntersectionObserver((entries) => {
+    if (entries.some((e) => e.isIntersecting)) {
+      io.disconnect();
+      fn();
+    }
+  });
+  io.observe(el);
+}
+
+/** Count a number up from 0 when it becomes visible. Non-numbers are set as-is. */
+export function countUp(el, value, { duration = 1100 } = {}) {
+  if (!el) return;
+  const target = Number(value);
+  if (!Number.isFinite(target) || reduceMotion()) {
+    el.textContent = value;
+    return;
+  }
+  el.textContent = '0';
+  whenVisible(el, () => {
+    const start = performance.now();
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      el.textContent = Math.round(target * (1 - (1 - t) ** 3)).toLocaleString('en-US');
+      if (t < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  });
+}
+
+/** Type text into an element like a terminal, with a blinking cursor while typing. */
+export function typeText(el, text, { speed = 16, keepCursor = false } = {}) {
+  if (!el) return Promise.resolve();
+  if (reduceMotion()) {
+    el.textContent = text;
+    return Promise.resolve();
+  }
+  clearInterval(el._typing);
+  el.textContent = '';
+  el.classList.add('typing');
+  let i = 0;
+  return new Promise((resolve) => {
+    el._typing = setInterval(() => {
+      el.textContent = text.slice(0, ++i);
+      if (i >= text.length) {
+        clearInterval(el._typing);
+        if (!keepCursor) el.classList.remove('typing');
+        resolve();
+      }
+    }, speed);
+  });
+}
+
 initHeader();
 initCopy();
+revealIn();

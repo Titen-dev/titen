@@ -1,4 +1,4 @@
-import { $, esc, api, sourceLinks, store, errorCard } from './app.js';
+import { $, esc, api, sourceLinks, store, errorCard, revealIn } from './app.js';
 
 const MAX = 6;
 const chipsEl = $('[data-topics]');
@@ -48,6 +48,7 @@ async function renderBriefs() {
     if (myRun !== run) return; // selection changed meanwhile
     const slot = briefsEl.querySelector(`[data-brief="${CSS.escape(t.id)}"]`);
     if (slot) slot.outerHTML = html;
+    revealIn(briefsEl);
   }
 }
 
