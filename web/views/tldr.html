@@ -1,0 +1,19 @@
+<!--meta title="TL;DR any link · Titen" description="Paste a long article. Get the point, the key facts and what's missing." scripts="tldr.js" -->
+<section class="page-head">
+  <div class="wrap">
+    <div class="eyebrow"><span class="eyebrow-label">TL;DR</span><span class="eyebrow-rule"></span><span class="eyebrow-note">Any link, one minute</span></div>
+    <h1 class="display-2">Too long? <em>Let Titen read it.</em></h1>
+    <p class="section-lede">Paste the link to an article, a blog post or a report. Titen reads the page and gives you the point, the key facts, and what the page leaves out.</p>
+    <form class="url-form" data-tldr-form novalidate>
+      <label class="sr-only" for="tldr-url">Link to summarize</label>
+      <input id="tldr-url" name="url" type="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://…" required>
+      <button class="btn btn-accent" type="submit">Summarize</button>
+    </form>
+    <p class="hint">Works with most articles. Pages that need a login (X, TikTok, Instagram, Facebook) or sit behind a paywall can't be read.</p>
+  </div>
+</section>
+<section class="section section-tight">
+  <div class="wrap narrow">
+    <div data-tldr-result aria-live="polite"></div>
+  </div>
+</section>

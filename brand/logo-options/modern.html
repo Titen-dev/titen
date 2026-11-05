@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Titen logo options v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>
+  :root {
+    --paper: #f6f3ec; --surface: #fffdf8; --ink: #1c1e2b; --muted: #6b6873; --line: #e2dccf;
+    --nila: #1e3a6d; --on-nila: #f6f3ec; --coral: #e0703f;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 500 16px/1.55 'Plus Jakarta Sans', system-ui, sans-serif; }
+  .page { max-width: 1320px; margin: 0 auto; padding: 56px 40px 72px; }
+  .eyebrow { font: 500 12px 'JetBrains Mono', monospace; letter-spacing: .18em; text-transform: uppercase; color: #a84c22; }
+  h1 { font: 800 48px/1.05 'Plus Jakarta Sans', sans-serif; letter-spacing: -.03em; margin: 12px 0 10px; }
+  h1 span { color: var(--coral); }
+  .lede { color: #3a3c4a; max-width: 760px; margin: 0 0 40px; }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px 24px 20px; }
+  .card.pick { outline: 2px solid var(--coral); outline-offset: -1px; }
+  .card-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .card-head h2 { font: 700 22px/1.1 'Plus Jakarta Sans', sans-serif; letter-spacing: -.02em; margin: 0; }
+  .tag { font: 600 11px 'JetBrains Mono', monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--coral); background: #fbe9df; border-radius: 999px; padding: 5px 10px; }
+  .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .tile { height: 210px; border-radius: 12px; display: grid; place-items: center; }
+  .tile.paper { background: var(--paper); color: var(--ink); }
+  .tile.nila { background: var(--nila); color: var(--on-nila); }
+  .tile svg.sym { width: 120px; height: 120px; }
+  .row { display: flex; align-items: center; gap: 16px; margin: 12px 0 4px; padding: 12px 14px; background: var(--paper); border-radius: 12px; font: 500 11px 'JetBrains Mono', monospace; color: var(--muted); }
+  .row .sep { flex: 1; }
+  .row > svg { color: var(--ink); }
+  .app { display: grid; place-items: center; background: var(--nila); color: var(--on-nila); border-radius: 23%; }
+  .app.light { background: #fff; color: var(--ink); box-shadow: 0 0 0 1px var(--line); }
+  .note { margin: 10px 0 0; color: #3a3c4a; font-size: 15px; }
+  /* wordmark */
+  .wm { font: 800 76px/1 'Plus Jakarta Sans', sans-serif; letter-spacing: -.025em; display: inline-flex; align-items: baseline; }
+  .wm .i { position: relative; }
+  .wm .i::after { content: ""; position: absolute; left: 50%; top: -0.02em; width: .2em; height: .2em; border-radius: 50%; background: var(--coral); transform: translateX(-50%); }
+  .wm-sm { font-size: 44px; }
+  .lock { display: inline-flex; align-items: center; gap: 14px; }
+  .lock svg { width: 54px; height: 54px; }
+  .foot { margin-top: 32px; font: 500 12px 'JetBrains Mono', monospace; color: var(--muted); }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- M1 · Dot-T: Waluku's three belt stars as the bar of a T, one pill as the stem -->
+    <symbol id="m1" viewBox="0 0 100 100">
+      <circle cx="20" cy="27" r="11" fill="currentColor"/>
+      <circle cx="50" cy="27" r="11" fill="var(--c, #e0703f)"/>
+      <circle cx="80" cy="27" r="11" fill="currentColor"/>
+      <rect x="39" y="45" width="22" height="44" rx="11" fill="currentColor"/>
+    </symbol>
+
+    <!-- M2 · Rising belt: three stars climbing like a trend line -->
+    <symbol id="m2" viewBox="0 0 100 100">
+      <circle cx="22" cy="72" r="10" fill="currentColor"/>
+      <circle cx="50" cy="50" r="12" fill="currentColor"/>
+      <circle cx="78" cy="28" r="14" fill="var(--c, #e0703f)"/>
+    </symbol>
+
+    <!-- M3 · t-star monogram: a friendly lowercase t, the star sits where the dot would be -->
+    <symbol id="m3" viewBox="0 0 100 100">
+      <path d="M44 22 V66 Q44 82 62 82 H70" fill="none" stroke="currentColor" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M26 42 H64" fill="none" stroke="currentColor" stroke-width="15" stroke-linecap="round"/>
+      <path d="M78 10 Q78 22 90 22 Q78 22 78 34 Q78 22 66 22 Q78 22 78 10Z" fill="var(--c, #e0703f)"/>
+    </symbol>
+
+    <!-- M4 · Lens: a thick ring with one star inside — "the one who watches" -->
+    <symbol id="m4" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="34" fill="none" stroke="currentColor" stroke-width="16"/>
+      <circle cx="62" cy="38" r="11" fill="var(--c, #e0703f)"/>
+    </symbol>
+
+    <!-- M5 · Bold T with a star cut: a solid T whose crossing is the brightest star -->
+    <symbol id="m5" viewBox="0 0 100 100">
+      <rect x="10" y="16" width="80" height="22" rx="11" fill="currentColor"/>
+      <rect x="39" y="16" width="22" height="72" rx="11" fill="currentColor"/>
+      <circle cx="50" cy="27" r="7" fill="var(--c, #e0703f)"/>
+    </symbol>
+
+    <!-- M6 · Dot-T in a tile: M1 already placed in the app-icon square -->
+    <symbol id="m6" viewBox="0 0 100 100">
+      <rect width="100" height="100" rx="24" fill="currentColor"/>
+      <g style="color: var(--bg, #f6f3ec)">
+        <circle cx="27" cy="34" r="8.5" fill="currentColor"/>
+        <circle cx="73" cy="34" r="8.5" fill="currentColor"/>
+        <rect x="41.5" y="48" width="17" height="34" rx="8.5" fill="currentColor"/>
+      </g>
+      <circle cx="50" cy="34" r="8.5" fill="var(--c, #e0703f)"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="page">
+  <div class="eyebrow">Titen · brand · v2</div>
+  <h1>Modern &amp; simple. <span>Same story, fewer lines.</span></h1>
+  <p class="lede">Flat, bold shapes in two colors (nila blue and one coral accent) that stay clear at 16 pixels. The name is set in Plus Jakarta Sans, a modern typeface designed in Jakarta.</p>
+
+  <div class="grid">
+    <section class="card pick">
+      <div class="card-head"><h2>M1 · Dot-T</h2><span class="tag">recommended</span></div>
+      <div class="tiles">
+        <div class="tile paper"><svg class="sym"><use href="#m1"/></svg></div>
+        <div class="tile nila"><svg class="sym"><use href="#m1"/></svg></div>
+      </div>
+      <div class="row">64 <svg width="64" height="64"><use href="#m1"/></svg> 32 <svg width="32" height="32"><use href="#m1"/></svg> 16 <svg width="16" height="16"><use href="#m1"/></svg><span class="sep"></span>app <span class="app" style="width:56px;height:56px"><svg width="34" height="34"><use href="#m1"/></svg></span><span class="app light" style="width:56px;height:56px"><svg width="34" height="34"><use href="#m1"/></svg></span></div>
+      <p class="note">Waluku's three belt stars become the bar of a T; the brightest one is coral. Reads as a letter and as a constellation.</p>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>M2 · Rising belt</h2><span class="tag">trend</span></div>
+      <div class="tiles">
+        <div class="tile paper"><svg class="sym"><use href="#m2"/></svg></div>
+        <div class="tile nila"><svg class="sym"><use href="#m2"/></svg></div>
+      </div>
+      <div class="row">64 <svg width="64" height="64"><use href="#m2"/></svg> 32 <svg width="32" height="32"><use href="#m2"/></svg> 16 <svg width="16" height="16"><use href="#m2"/></svg><span class="sep"></span>app <span class="app" style="width:56px;height:56px"><svg width="36" height="36"><use href="#m2"/></svg></span><span class="app light" style="width:56px;height:56px"><svg width="36" height="36"><use href="#m2"/></svg></span></div>
+      <p class="note">The belt's three stars climbing like a chart: Waluku and "trending up" in one mark. The most minimal option.</p>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>M3 · t-star</h2><span class="tag">friendly</span></div>
+      <div class="tiles">
+        <div class="tile paper"><svg class="sym"><use href="#m3"/></svg></div>
+        <div class="tile nila"><svg class="sym"><use href="#m3"/></svg></div>
+      </div>
+      <div class="row">64 <svg width="64" height="64"><use href="#m3"/></svg> 32 <svg width="32" height="32"><use href="#m3"/></svg> 16 <svg width="16" height="16"><use href="#m3"/></svg><span class="sep"></span>app <span class="app" style="width:56px;height:56px"><svg width="36" height="36"><use href="#m3"/></svg></span><span class="app light" style="width:56px;height:56px"><svg width="36" height="36"><use href="#m3"/></svg></span></div>
+      <p class="note">A rounded lowercase t with a star beside it. Warm and app-like, closest to modern startup logos.</p>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>M4 · Lens</h2><span class="tag">watcher</span></div>
+      <div class="tiles">
+        <div class="tile paper"><svg class="sym"><use href="#m4"/></svg></div>
+        <div class="tile nila"><svg class="sym"><use href="#m4"/></svg></div>
+      </div>
+      <div class="row">64 <svg width="64" height="64"><use href="#m4"/></svg> 32 <svg width="32" height="32"><use href="#m4"/></svg> 16 <svg width="16" height="16"><use href="#m4"/></svg><span class="sep"></span>app <span class="app" style="width:56px;height:56px"><svg width="34" height="34"><use href="#m4"/></svg></span><span class="app light" style="width:56px;height:56px"><svg width="34" height="34"><use href="#m4"/></svg></span></div>
+      <p class="note">A thick ring with one star inside: an eye, a lens, a sky. Very simple, but less specific to Titen.</p>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>M5 · Solid T</h2><span class="tag">bold</span></div>
+      <div class="tiles">
+        <div class="tile paper"><svg class="sym"><use href="#m5"/></svg></div>
+        <div class="tile nila"><svg class="sym"><use href="#m5"/></svg></div>
+      </div>
+      <div class="row">64 <svg width="64" height="64"><use href="#m5"/></svg> 32 <svg width="32" height="32"><use href="#m5"/></svg> 16 <svg width="16" height="16"><use href="#m5"/></svg><span class="sep"></span>app <span class="app" style="width:56px;height:56px"><svg width="34" height="34"><use href="#m5"/></svg></span><span class="app light" style="width:56px;height:56px"><svg width="34" height="34"><use href="#m5"/></svg></span></div>
+      <p class="note">A solid rounded T with one coral star where the bars meet. The strongest at small sizes, the least poetic.</p>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>M6 · App tile</h2><span class="tag">icon</span></div>
+      <div class="tiles">
+        <div class="tile paper" style="--bg:#f6f3ec"><svg class="sym" style="color:#1e3a6d"><use href="#m6"/></svg></div>
+        <div class="tile nila" style="--bg:#1e3a6d"><svg class="sym" style="color:#f6f3ec"><use href="#m6"/></svg></div>
+      </div>
+      <div class="row" style="--bg:#f6f3ec">64 <svg width="64" height="64" style="color:#1e3a6d"><use href="#m6"/></svg> 32 <svg width="32" height="32" style="color:#1e3a6d"><use href="#m6"/></svg> 16 <svg width="16" height="16" style="color:#1e3a6d"><use href="#m6"/></svg><span class="sep"></span>Dot-T on its own tile: favicon, profile photo, CLI</div>
+      <p class="note">M1 placed in the nila square. Works as the browser tab icon and social avatar whichever symbol you pick for the header.</p>
+    </section>
+  </div>
+
+  <div class="card" style="margin-top:24px">
+    <div class="card-head"><h2>Wordmark &amp; lockups</h2><span class="tag">Plus Jakarta Sans</span></div>
+    <div class="tiles">
+      <div class="tile paper"><span class="wm">t<span class="i">ı</span>ten</span></div>
+      <div class="tile nila"><span class="wm">t<span class="i">ı</span>ten</span></div>
+      <div class="tile paper"><span class="lock"><svg><use href="#m1"/></svg><span class="wm wm-sm">t<span class="i">ı</span>ten</span></span></div>
+      <div class="tile nila"><span class="lock"><svg><use href="#m2"/></svg><span class="wm wm-sm">t<span class="i">ı</span>ten</span></span></div>
+    </div>
+    <p class="note">The dot on the i is the coral star. Bottom: Dot-T + name (left), Rising belt + name (right). Any symbol pairs with the same wordmark.</p>
+  </div>
+
+  <p class="foot">Titen · logo options v2 (modern) · nila #1e3a6d · coral #e0703f · paper #f6f3ec · ink #1c1e2b</p>
+</div>
+</body>
+</html>

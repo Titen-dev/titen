@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:ht="https://trends.google.com/trending/rss" version="2.0"><channel><title>Daily Search Trends</title>
+<item><title>world cup draw</title><ht:approx_traffic>500K+</ht:approx_traffic><link>https://trends.google.com/trending/rss?geo=US</link>
+<ht:news_item><ht:news_item_title>World Cup draw: groups revealed</ht:news_item_title><ht:news_item_snippet/><ht:news_item_url>https://example.com/wc</ht:news_item_url><ht:news_item_source>ESPN</ht:news_item_source></ht:news_item>
+<ht:news_item><ht:news_item_title>Second story</ht:news_item_title><ht:news_item_url>https://example.com/wc2</ht:news_item_url><ht:news_item_source>BBC</ht:news_item_source></ht:news_item>
+</item>
+<item><title>eclipse</title><ht:approx_traffic>100K+</ht:approx_traffic></item>
+</channel></rss>

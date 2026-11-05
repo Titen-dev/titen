@@ -1,0 +1,50 @@
+<!--meta title="Scam Check · Titen" description="Is this message, link or screenshot a scam? Titen checks it and tells you what to do." scripts="scam.js" -->
+<section class="page-head">
+  <div class="wrap">
+    <div class="eyebrow"><span class="eyebrow-label">Scam check</span><span class="eyebrow-rule"></span><span class="eyebrow-note">Look before you click</span></div>
+    <h1 class="display-2">Is this a scam? <em>Let's look closely.</em></h1>
+    <p class="section-lede">Paste a text message, email, DM or link, or add a screenshot. Titen checks every link without opening it, reads the message, and tells you what it sees and what to do.</p>
+  </div>
+</section>
+<section class="section section-tight">
+  <div class="wrap scam-grid">
+    <form class="card scam-form" data-scam-form novalidate>
+      <label class="field-label" for="scam-text">The message</label>
+      <textarea id="scam-text" name="text" rows="6" maxlength="8000" placeholder="Paste the message here…"></textarea>
+
+      <label class="field-label" for="scam-url">A link <span class="optional">(optional)</span></label>
+      <input id="scam-url" name="url" type="text" inputmode="url" autocomplete="off" spellcheck="false" placeholder="example.com/login">
+
+      <span class="field-label" id="shot-label">A screenshot <span class="optional">(optional)</span></span>
+      <div class="drop" data-drop tabindex="0" role="button" aria-labelledby="shot-label" aria-describedby="drop-help">
+        <input type="file" accept="image/png,image/jpeg,image/webp" data-file hidden>
+        <div class="drop-empty" data-drop-empty>
+          <b>Drop, paste or choose an image</b>
+          <span id="drop-help">PNG, JPG or WebP · never stored</span>
+        </div>
+        <div class="drop-preview" data-drop-preview hidden>
+          <img alt="Screenshot to check" data-preview-img>
+          <button type="button" class="btn-ghost btn-small" data-remove-image>Remove</button>
+        </div>
+      </div>
+
+      <button class="btn btn-accent btn-block" type="submit">Check it</button>
+      <p class="hint">Don't paste passwords or one-time codes. Titen is an AI and can be wrong.</p>
+    </form>
+
+    <div class="scam-side">
+      <div data-scam-result aria-live="polite">
+        <div class="card card-quiet">
+          <span class="eyebrow-label">What Titen looks for</span>
+          <ul class="checklist">
+            <li><b>Urgency and threats.</b> "Within 24 hours or your account closes."</li>
+            <li><b>Requests for codes, passwords or seed phrases.</b> No real company asks for these.</li>
+            <li><b>Odd payment methods.</b> Gift cards, crypto, "small fees" to release a parcel.</li>
+            <li><b>Look-alike links.</b> paypa1.com, amaz0n-support.top, brand-new domains.</li>
+            <li><b>Too good to be true.</b> Prizes you never entered, easy jobs, guaranteed returns.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,65 @@
+<!--meta title="Titen · Every signal, one clear picture" description="Titen watches search trends, headlines and what developers build around the world, and tells you what matters, with sources. It also summarizes any link and spots scams." scripts="home.js" -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow"><span class="eyebrow-label">Titen</span><span class="eyebrow-rule"></span><span class="eyebrow-note">Watching the world</span><span class="eyebrow-rule"></span><span class="eyebrow-note"><span class="live-dot"></span> Live</span></div>
+      <h1 id="hero-title" class="display">Every signal, <em>one clear picture.</em></h1>
+      <p class="hero-lede">Titen watches search trends, headlines and what developers build around the world, connects the dots, and tells you what matters, with every source attached. Named after the Javanese art of reading signs.</p>
+      <div class="hero-actions">
+        <a class="btn btn-accent" href="#radar">See today's radar</a>
+        <a class="btn btn-outline" href="/scam">Check a message</a>
+      </div>
+    </div>
+    <figure class="hero-art">
+      {{> globe}}
+      <figcaption data-globe-caption>Reading the world's signals…</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="wrap" aria-label="Titen processes">
+  <div class="console" data-console>
+    <div class="console-bar" aria-hidden="true"><i></i><i></i><i></i><span>titen · processes</span></div>
+    <div class="console-table" role="table" aria-label="What Titen is doing">
+      <div class="console-row console-head" role="row"><span role="columnheader">PID</span><span role="columnheader">Process</span><span role="columnheader">Status</span><span role="columnheader">Last run</span><span role="columnheader">Output</span></div>
+      <div class="console-row" role="row"><span role="cell">1</span><b role="cell">trend_radar</b><span role="cell" class="st-ok">● watching</span><span role="cell" data-proc="radar-last">—</span><span role="cell" class="out" data-proc="radar-out">starting…</span></div>
+      <div class="console-row" role="row"><span role="cell">2</span><b role="cell">brief_writer</b><span role="cell" class="st-run">● writing</span><span role="cell" data-proc="brief-last">—</span><span role="cell" class="out" data-proc="brief-out">—</span></div>
+      <div class="console-row" role="row"><span role="cell">3</span><b role="cell">scam_guard</b><span role="cell" class="st-ok">● on duty</span><span role="cell" data-proc="scam-last">—</span><span role="cell" class="out" data-proc="scam-out">—</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="measured-title">
+  <div class="wrap">
+    <div class="eyebrow"><span class="eyebrow-label" id="measured-title">Measured</span><span class="eyebrow-rule"></span><span class="eyebrow-note">From the last scan and today</span></div>
+    <div class="measured">
+      <div class="m-card"><span class="m-label">Signals read</span><span class="m-num" data-m="signals">—</span><div class="m-bars" data-m="feeds"></div><span class="m-foot">per feed, this scan</span></div>
+      <div class="m-card"><span class="m-label">Stories kept</span><span class="m-num"><span data-m="topics">—</span><small data-m="topics-of"></small></span><div class="m-meter"><span data-meter="topics"></span></div><span class="m-foot">merged and ranked</span></div>
+      <div class="m-card"><span class="m-label">Briefs today</span><span class="m-num" data-m="briefs">—</span><div class="m-meter"><span data-meter="briefs"></span></div><span class="m-foot">of 20 topics written</span></div>
+      <div class="m-card"><span class="m-label">Scams flagged</span><span class="m-num"><span data-m="flagged">—</span><small data-m="checks-of"></small></span><div class="m-meter"><span data-meter="flagged"></span></div><span class="m-foot">links never opened</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-top-0" id="radar" aria-labelledby="radar-title">
+  <div class="wrap">
+    <div class="eyebrow"><span class="eyebrow-label">The radar</span><span class="eyebrow-rule"></span><span class="eyebrow-note">What the world is watching</span></div>
+    <h2 id="radar-title" class="display-2">What's happening, <em>right now.</em></h2>
+    <p class="section-lede">Titen reads around 150 signals, merges the ones about the same story, and keeps the ones that matter most worldwide. Every summary links to where it came from.</p>
+    <div class="radar" data-radar aria-live="polite">
+      <div class="loading-card"><span class="spinner" aria-hidden="true"></span><div><b>Titen is reading the signs…</b><span>The first scan takes about 30 seconds.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-band" aria-labelledby="tools-title">
+  <div class="wrap">
+    <div class="eyebrow"><span class="eyebrow-label">The tools</span><span class="eyebrow-rule"></span><span class="eyebrow-note">Free, no sign-up</span></div>
+    <h2 id="tools-title" class="display-2">Ask Titen to <em>look for you.</em></h2>
+    <div class="tools">
+      <a class="tool" href="/brief"><span class="tool-glyph" aria-hidden="true">∑ 48h</span><span class="tool-title">Daily Brief</span><span class="tool-text">The last two days on the topics you follow, in a few honest lines.</span><span class="tool-go" aria-hidden="true">→</span></a>
+      <a class="tool" href="/tldr"><span class="tool-glyph" aria-hidden="true">f(x) → 1</span><span class="tool-title">TL;DR any link</span><span class="tool-text">Paste a long article. Get the point, the key facts, and what's missing.</span><span class="tool-go" aria-hidden="true">→</span></a>
+      <a class="tool" href="/scam"><span class="tool-glyph" aria-hidden="true">P(scam)</span><span class="tool-title">Scam Check</span><span class="tool-text">Messages, links and screenshots. A clear verdict, the red flags, and next steps.</span><span class="tool-go" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>

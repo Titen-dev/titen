@@ -1,0 +1,50 @@
+{
+  "name": "titen",
+  "version": "0.1.0",
+  "description": "An AI agent that reads the signs of the world: trend radar, daily briefs, TL;DR for any link, scam checks and page/topic watching.",
+  "license": "MIT",
+  "author": "Titen-dev",
+  "homepage": "https://github.com/Titen-dev/titen#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Titen-dev/titen.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Titen-dev/titen/issues"
+  },
+  "type": "module",
+  "bin": {
+    "titen": "cli/index.js"
+  },
+  "files": [
+    "cli/",
+    "core/",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20.12"
+  },
+  "scripts": {
+    "test": "node --test \"test/**/*.test.js\"",
+    "start": "node web/server.js",
+    "web": "node web/server.js --open",
+    "titen": "node cli/index.js"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "cli",
+    "trends",
+    "news",
+    "brief",
+    "summary",
+    "tldr",
+    "scam",
+    "phishing",
+    "monitor",
+    "watch",
+    "openrouter"
+  ],
+  "private": true
+}

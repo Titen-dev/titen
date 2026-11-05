@@ -1,0 +1,8 @@
+# dependencies and local settings
+node_modules/
+.env
+*.log
+.cache/
+
+# large or third-party reference material (not part of the product)
+*.mp4

@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Titen logo options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=EB+Garamond:ital@0;1&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>
+  :root {
+    --paper: #f6f3ec; --surface: #fffdf8; --ink: #1c1e2b; --muted: #6b6873; --line: #e2dccf;
+    --nila: #1e3a6d; --nila-deep: #172c55; --on-nila: #f3f0e8; --coral: #d9714a; --coral-light: #f08c63;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 17px/1.55 'EB Garamond', Georgia, serif; }
+  .page { max-width: 1320px; margin: 0 auto; padding: 56px 40px 72px; }
+  .eyebrow { font: 500 12px 'JetBrains Mono', monospace; letter-spacing: .18em; text-transform: uppercase; color: #a84c22; display: flex; gap: 14px; align-items: center; }
+  .eyebrow::after { content: ""; width: 72px; height: 1px; background: #cfc6b4; }
+  h1 { font: 500 56px/1.05 'Cormorant Garamond', serif; margin: 14px 0 10px; letter-spacing: -.01em; }
+  h1 em { color: var(--coral); font-weight: 500; }
+  .lede { color: #3a3c4a; max-width: 760px; margin: 0 0 40px; }
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 22px 24px 20px; }
+  .card.pick { border: 2px solid var(--coral); }
+  .card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 16px; }
+  .card-head h2 { font: 500 28px/1.1 'Cormorant Garamond', serif; margin: 0; }
+  .tag { font: 600 11px 'JetBrains Mono', monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--coral); border: 1px solid currentColor; border-radius: 999px; padding: 4px 9px; white-space: nowrap; }
+  .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .tile { height: 220px; border-radius: 6px; display: grid; place-items: center; overflow: hidden; }
+  .tile.paper { background: var(--paper); border: 1px solid var(--line); color: var(--ink); }
+  .tile.nila { background: linear-gradient(160deg, var(--nila-deep), var(--nila)); color: var(--on-nila); }
+  .tile svg.sym { width: 130px; height: 130px; }
+  .tile.wide svg.sym { width: 96px; height: 96px; }
+  .small { display: flex; align-items: center; gap: 18px; margin: 14px 0 6px; padding: 10px 12px; background: var(--paper); border: 1px solid var(--line); border-radius: 6px; font: 500 11px 'JetBrains Mono', monospace; color: var(--muted); letter-spacing: .08em; }
+  .small svg { color: var(--ink); }
+  .small .app { border-radius: 22%; background: var(--nila); color: var(--on-nila); display: grid; place-items: center; }
+  .small .sep { flex: 1; }
+  .note { margin: 10px 0 0; color: #3a3c4a; font-size: 16px; }
+  .note b { font-weight: 500; color: var(--ink); }
+  .pros { color: #2e7a4c; } .cons { color: #9a6a0c; }
+  /* wordmarks */
+  .wm { display: inline-flex; align-items: center; gap: 16px; }
+  .wm-serif { font: italic 600 92px/1 'Cormorant Garamond', serif; letter-spacing: -.01em; position: relative; }
+  .wm-serif .i { position: relative; display: inline-block; }
+  .wm-serif .i svg { position: absolute; left: 50%; top: 0.06em; width: .28em; height: .28em; transform: translateX(-12%); }
+  .wm-mono { font: 600 30px/1 'JetBrains Mono', monospace; letter-spacing: .26em; }
+  .wm-sm .wm-serif { font-size: 64px; }
+  .accent { color: var(--coral); }
+  .nila .accent { color: var(--coral-light); }
+  .foot { margin-top: 36px; font: 500 12px 'JetBrains Mono', monospace; color: var(--muted); letter-spacing: .06em; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- 4-point sparkle star centred on 0,0, radius 1 -->
+    <path id="spark" d="M0 -1 Q0 0 1 0 Q0 0 0 1 Q0 0 -1 0 Q0 0 0 -1Z"/>
+
+    <!-- A: Waluku ring (refined current mark) -->
+    <symbol id="opt-a" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="4.5"/>
+      <circle cx="50" cy="50" r="31" fill="none" stroke="currentColor" stroke-width="3.6" stroke-dasharray="0.1 8" stroke-linecap="round"/>
+      <circle cx="31" cy="58" r="7" fill="var(--c, #d9714a)"/>
+      <circle cx="50" cy="50" r="8" fill="var(--c, #d9714a)"/>
+      <circle cx="69" cy="42" r="7" fill="var(--c, #d9714a)"/>
+    </symbol>
+
+    <!-- B: Mata Titen (the observing eye) -->
+    <symbol id="opt-b" viewBox="0 0 100 100">
+      <path d="M6 50 Q50 10 94 50 Q50 90 6 50Z" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linejoin="round"/>
+      <circle cx="50" cy="50" r="21" fill="none" stroke="currentColor" stroke-width="3.6"/>
+      <circle cx="50" cy="50" r="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-dasharray="0.1 5" stroke-linecap="round"/>
+      <circle cx="40" cy="55" r="4.6" fill="var(--c, #d9714a)"/>
+      <circle cx="50" cy="50" r="5.2" fill="var(--c, #d9714a)"/>
+      <circle cx="60" cy="45" r="4.6" fill="var(--c, #d9714a)"/>
+    </symbol>
+
+    <!-- C: Star-T — Waluku's belt + plough/sword form the letter T -->
+    <symbol id="opt-c" viewBox="0 0 100 100">
+      <path d="M18 34 L50 30 L82 26 M50 30 L50 86" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="18" cy="34" r="9" fill="var(--c, #d9714a)"/>
+      <use href="#spark" transform="translate(50 30) scale(17)" fill="var(--c, #d9714a)"/>
+      <circle cx="82" cy="26" r="9" fill="var(--c, #d9714a)"/>
+      <circle cx="50" cy="56" r="5.5" fill="currentColor"/>
+      <circle cx="50" cy="71" r="6.5" fill="currentColor"/>
+      <circle cx="50" cy="86" r="5" fill="currentColor"/>
+    </symbol>
+
+    <!-- C2: Star-T inside the Pranata Mangsa dial -->
+    <symbol id="opt-c2" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="3.6"/>
+      <path d="M50 1V9 M50 91V99 M1 50H9 M91 50H99 M15.4 15.4L21 21 M84.6 15.4L79 21 M15.4 84.6L21 79 M84.6 84.6L79 79" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M27 40 L50 37 L73 34 M50 37 L50 76" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/>
+      <circle cx="27" cy="40" r="6.6" fill="var(--c, #d9714a)"/>
+      <use href="#spark" transform="translate(50 37) scale(12.5)" fill="var(--c, #d9714a)"/>
+      <circle cx="73" cy="34" r="6.6" fill="var(--c, #d9714a)"/>
+      <circle cx="50" cy="55" r="4" fill="currentColor"/>
+      <circle cx="50" cy="66" r="4.8" fill="currentColor"/>
+      <circle cx="50" cy="76" r="3.8" fill="currentColor"/>
+    </symbol>
+
+    <!-- E: Seal — Star-T cut out of a solid round badge (best for app icons) -->
+    <symbol id="opt-e" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="47" fill="currentColor"/>
+      <g style="color: var(--bg, #f6f3ec)">
+        <path d="M22 38 L50 34 L78 30 M50 34 L50 80" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="50" cy="57" r="5" fill="currentColor"/>
+        <circle cx="50" cy="69" r="5.8" fill="currentColor"/>
+        <circle cx="50" cy="80" r="4.4" fill="currentColor"/>
+      </g>
+      <circle cx="22" cy="38" r="8" fill="var(--c, #d9714a)"/>
+      <use href="#spark" transform="translate(50 34) scale(15)" fill="var(--c, #d9714a)"/>
+      <circle cx="78" cy="30" r="8" fill="var(--c, #d9714a)"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="page">
+  <div class="eyebrow">Titen · brand</div>
+  <h1>Logo options. <em>Pick the one that reads the sky.</em></h1>
+  <p class="lede">Each option is shown on paper and on nila blue, plus at 64, 32 and 16 pixels (browser tab size) to check it still reads when tiny. The three coral stars are always Lintang Waluku's belt, the stars Javanese farmers watched to know when to plant.</p>
+
+  <div class="grid">
+
+    <section class="card">
+      <div class="card-head"><h2>A · Waluku ring</h2><span class="tag">current, refined</span></div>
+      <div class="tiles">
+        <div class="tile paper"><svg class="sym"><use href="#opt-a"/></svg></div>
+        <div class="tile nila" style="--c:#f08c63"><svg class="sym"><use href="#opt-a"/></svg></div>
+      </div>
+      <div class="small">64 <svg width="64" height="64"><use href="#opt-a"/></svg> 32 <svg width="32" height="32"><use href="#opt-a"/></svg> 16 <svg width="16" height="16"><use href="#opt-a"/></svg><span class="sep"></span>app <span class="app" style="width:48px;height:48px;--c:#f08c63"><svg width="34" height="34"><use href="#opt-a"/></svg></span></div>
+      <p class="note"><b class="pros">+</b> Calm, simple, already on the site. <b class="cons">−</b> Generic: reads as "a circle with dots" unless you know the story.</p>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>B · Mata Titen</h2><span class="tag">the eye</span></div>
+      <div class="tiles">
+        <div class="tile paper"><svg class="sym"><use href="#opt-b"/></svg></div>
+        <div class="tile nila" style="--c:#f08c63"><svg class="sym"><use href="#opt-b"/></svg></div>
+      </div>
+      <div class="small">64 <svg width="64" height="64"><use href="#opt-b"/></svg> 32 <svg width="32" height="32"><use href="#opt-b"/></svg> 16 <svg width="16" height="16"><use href="#opt-b"/></svg><span class="sep"></span>app <span class="app" style="width:48px;height:48px;--c:#f08c63"><svg width="38" height="38"><use href="#opt-b"/></svg></span></div>
+      <p class="note"><b class="pros">+</b> Says "observe" instantly; the pupil is the season dial. <b class="cons">−</b> Eye logos are common and can feel like surveillance.</p>
+    </section>
+
+    <section class="card pick">
+      <div class="card-head"><h2>C · Star-T</h2><span class="tag">recommended</span></div>
+      <div class="tiles">
+        <div class="tile paper"><svg class="sym"><use href="#opt-c"/></svg></div>
+        <div class="tile nila" style="--c:#f08c63"><svg class="sym"><use href="#opt-c"/></svg></div>
+      </div>
+      <div class="small">64 <svg width="64" height="64"><use href="#opt-c"/></svg> 32 <svg width="32" height="32"><use href="#opt-c"/></svg> 16 <svg width="16" height="16"><use href="#opt-c"/></svg><span class="sep"></span>app <span class="app" style="width:48px;height:48px;--c:#f08c63"><svg width="36" height="36"><use href="#opt-c"/></svg></span></div>
+      <p class="note"><b class="pros">+</b> Waluku's belt and plough really do form a T: the constellation <i>is</i> the initial. Unique, meaningful, bold when small. <b class="cons">−</b> Needs the story once to "click".</p>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>C2 · Star-T in the dial</h2><span class="tag">badge</span></div>
+      <div class="tiles">
+        <div class="tile paper"><svg class="sym"><use href="#opt-c2"/></svg></div>
+        <div class="tile nila" style="--c:#f08c63"><svg class="sym"><use href="#opt-c2"/></svg></div>
+      </div>
+      <div class="small">64 <svg width="64" height="64"><use href="#opt-c2"/></svg> 32 <svg width="32" height="32"><use href="#opt-c2"/></svg> 16 <svg width="16" height="16"><use href="#opt-c2"/></svg><span class="sep"></span>app <span class="app" style="width:48px;height:48px;--c:#f08c63"><svg width="40" height="40"><use href="#opt-c2"/></svg></span></div>
+      <p class="note"><b class="pros">+</b> Star-T plus the Pranata Mangsa dial from the hero art; feels like an instrument or seal. <b class="cons">−</b> More detail, so it gets busy at 16 px.</p>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>D · Wordmark</h2><span class="tag">type only</span></div>
+      <div class="tiles">
+        <div class="tile paper"><span class="wm"><span class="wm-serif">t<span class="i">ı<svg viewBox="-1 -1 2 2"><use href="#spark" fill="#d9714a"/></svg></span>ten</span></span></div>
+        <div class="tile nila"><span class="wm"><span class="wm-serif">t<span class="i">ı<svg viewBox="-1 -1 2 2"><use href="#spark" fill="#f08c63"/></svg></span>ten</span></span></div>
+      </div>
+      <div class="small">tab <svg width="32" height="32" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="#1e3a6d"/><text x="16" y="24" text-anchor="middle" font-family="Cormorant Garamond" font-style="italic" font-weight="600" font-size="26" fill="#f3f0e8">t</text></svg><span class="sep"></span>the dot of the i is a star</div>
+      <p class="note"><b class="pros">+</b> Elegant, matches the site's serif headlines. <b class="cons">−</b> No symbol of its own; the tab icon falls back to a plain "t".</p>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>E · Seal</h2><span class="tag">app icon</span></div>
+      <div class="tiles">
+        <div class="tile paper" style="--bg:#f6f3ec"><svg class="sym" style="color:#1e3a6d"><use href="#opt-e"/></svg></div>
+        <div class="tile nila" style="--bg:#1e3a6d;--c:#f08c63"><svg class="sym" style="color:#f3f0e8"><use href="#opt-e"/></svg></div>
+      </div>
+      <div class="small" style="--bg:#f6f3ec">64 <svg width="64" height="64" style="color:#1e3a6d"><use href="#opt-e"/></svg> 32 <svg width="32" height="32" style="color:#1e3a6d"><use href="#opt-e"/></svg> 16 <svg width="16" height="16" style="color:#1e3a6d"><use href="#opt-e"/></svg><span class="sep"></span>solid, so it survives any background</div>
+      <p class="note"><b class="pros">+</b> Star-T cut out of a solid disc: strongest at tiny sizes and as a profile picture. <b class="cons">−</b> Heavier; less "airy" than the site's line style.</p>
+    </section>
+
+  </div>
+
+  <div class="card" style="margin-top:24px">
+    <div class="card-head"><h2>Lockups · symbol + name</h2><span class="tag">how it sits in the header</span></div>
+    <div class="tiles">
+      <div class="tile paper"><span class="wm"><svg class="sym" style="width:64px;height:64px"><use href="#opt-c"/></svg><span class="wm-mono">TITEN</span></span></div>
+      <div class="tile nila" style="--c:#f08c63"><span class="wm wm-sm"><svg class="sym" style="width:64px;height:64px"><use href="#opt-c"/></svg><span class="wm-serif">t<span class="i">ı<svg viewBox="-1 -1 2 2"><use href="#spark" fill="#f08c63"/></svg></span>ten</span></span></div>
+    </div>
+    <p class="note">Left: Star-T with the monospace name used in the site header today. Right: Star-T with the serif wordmark (option D). Any symbol above can pair with either name style.</p>
+  </div>
+
+  <p class="foot">Titen · logo options v1 · fonts: Cormorant Garamond, JetBrains Mono · colors: nila #1e3a6d, sogan coral #d9714a, paper #f6f3ec</p>
+</div>
+</body>
+</html>

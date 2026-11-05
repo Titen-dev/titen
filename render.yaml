@@ -1,0 +1,23 @@
+# Render Blueprint for the Titen website. https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: titen
+    runtime: node
+    plan: free
+    buildCommand: npm install --omit=dev
+    startCommand: node web/server.js
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "22"
+      - key: TRUST_PROXY
+        value: "1"
+      - key: TITEN_CACHE_DIR
+        value: /tmp/titen-cache
+      - key: TITEN_MODEL
+        value: anthropic/claude-haiku-5.5
+      - key: OPENROUTER_API_KEY
+        sync: false # paste the key in the Render dashboard, never in this file
