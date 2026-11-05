@@ -113,6 +113,12 @@ The website runs on the owner's OpenRouter key (`OPENROUTER_API_KEY`). Protectio
 
 Environment variables for the server: `PORT` (default 3000), `HOST` (default 127.0.0.1, or 0.0.0.0 when `NODE_ENV=production`), `TRUST_PROXY=1` behind a reverse proxy, `WARM_TRENDS=0` to skip the first scan on start.
 
+### Deploy
+
+- **Hugging Face Spaces** (free, no card): create a Docker Space, upload the two files in `deploy/huggingface/`, and add the secret `OPENROUTER_API_KEY`. The image pulls the latest code from this repository on every rebuild.
+- **Render**: `render.yaml` describes a free web service (Render may ask for a card to verify the account).
+- Anything that runs Node 20.12+ works: `NODE_ENV=production PORT=8080 node web/server.js`.
+
 ## Configuration
 
 `titen setup` saves to `~/.titen/config.json`. Environment variables override it:

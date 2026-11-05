@@ -28,6 +28,10 @@ const TYPES = {
   '.txt': 'text/plain; charset=utf-8',
 };
 
+// Nobody may frame the site, unless FRAME_ANCESTORS names who may (Hugging Face Spaces
+// shows apps inside an iframe on huggingface.co, e.g. FRAME_ANCESTORS=https://huggingface.co).
+const FRAME_ANCESTORS = (process.env.FRAME_ANCESTORS || '').split(/[\s,]+/).filter((o) => /^https:\/\/[\w.-]+$/.test(o));
+
 const SECURITY_HEADERS = {
   'Content-Security-Policy': [
     "default-src 'self'",
@@ -36,13 +40,13 @@ const SECURITY_HEADERS = {
     'font-src https://fonts.gstatic.com',
     "img-src 'self' data: blob:",
     "connect-src 'self'",
-    "frame-ancestors 'none'",
+    `frame-ancestors ${FRAME_ANCESTORS.length ? FRAME_ANCESTORS.join(' ') : "'none'"}`,
     "base-uri 'none'",
     "form-action 'self'",
     "object-src 'none'",
   ].join('; '),
   'X-Content-Type-Options': 'nosniff',
-  'X-Frame-Options': 'DENY',
+  ...(FRAME_ANCESTORS.length ? {} : { 'X-Frame-Options': 'DENY' }),
   'Referrer-Policy': 'strict-origin-when-cross-origin',
   'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=()',
   'Cross-Origin-Opener-Policy': 'same-origin',

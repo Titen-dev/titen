@@ -56,6 +56,23 @@ test('pages render fully with nav state and security headers', async () => {
   }
 });
 
+test('FRAME_ANCESTORS allows one embedder (Hugging Face) and drops X-Frame-Options', async () => {
+  const { execFile } = await import('node:child_process');
+  const script = `
+    const { createApp } = await import(${JSON.stringify(new URL('../web/server.js', import.meta.url).href)});
+    const app = createApp({ log: false });
+    app.server.listen(0, '127.0.0.1', async () => {
+      const r = await fetch('http://127.0.0.1:' + app.server.address().port + '/');
+      console.log(JSON.stringify({ csp: r.headers.get('content-security-policy'), xfo: r.headers.get('x-frame-options') }));
+      app.server.close();
+    });`;
+  const out = await new Promise((resolve, reject) =>
+    execFile(process.execPath, ['--input-type=module', '-e', script], { env: { ...process.env, FRAME_ANCESTORS: 'https://huggingface.co', OPENROUTER_API_KEY: 'x' } }, (err, stdout) => (err ? reject(err) : resolve(JSON.parse(stdout))))
+  );
+  assert.match(out.csp, /frame-ancestors https:\/\/huggingface\.co/);
+  assert.equal(out.xfo, null);
+});
+
 test('assets are versioned so browsers never use stale CSS/JS', async () => {
   const pages = renderPages();
   assert.match(pages.index, /href="\/assets\/titen\.css\?v=[0-9a-f]{10}"/);
