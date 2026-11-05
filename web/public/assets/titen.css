@@ -456,3 +456,6 @@ html .reveal.is-visible { opacity: 1; transform: none; }
   .globe { transform: none !important; }
   .display em, .display-2 em { animation: none !important; background-position: 0 0 !important; }
 }
+
+/* Spinning globe (canvas drawn by home.js; the SVG stays as the still fallback). */
+.globe-canvas { width: 100%; max-width: 520px; aspect-ratio: 1; height: auto; display: block; margin: 0 auto; }

@@ -101,6 +101,142 @@ function globeParallax() {
   });
 }
 
+// ---------- spinning globe ----------
+// Replaces the static SVG globe with a canvas that rotates like the Earth: dots on a tilted
+// sphere, coral signals pinned to world cities, and arcs flowing between them.
+const CITIES = [
+  [40.7, -74.0], // New York
+  [51.5, -0.1], // London
+  [6.5, 3.4], // Lagos
+  [19.1, 72.9], // Mumbai
+  [-6.2, 106.8], // Jakarta
+  [35.7, 139.7], // Tokyo
+  [-23.5, -46.6], // São Paulo
+];
+const ROUTES = [[0, 1], [1, 2], [1, 3], [3, 4], [4, 5], [0, 6], [6, 2]];
+
+function spinningGlobe() {
+  const svg = $('svg.globe');
+  if (!svg || reduceMotion()) return; // keep the still SVG
+  const canvas = document.createElement('canvas');
+  canvas.className = 'globe globe-canvas';
+  canvas.setAttribute('role', 'img');
+  canvas.setAttribute('aria-label', 'A spinning globe with signals lighting up in cities around the world');
+  svg.replaceWith(canvas);
+  const ctx = canvas.getContext('2d');
+
+  const rad = Math.PI / 180;
+  const TILT = 0.38; // axis tilt, radians
+  const SPEED = (2 * Math.PI) / 40000; // one turn per 40 s
+  const dots = [];
+  for (let la = -80; la <= 80; la += 10) for (let lo = 0; lo < 360; lo += 7) dots.push([la * rad, lo * rad]);
+  const cities = CITIES.map(([la, lo]) => [la * rad, lo * rad]);
+
+  let size = 0;
+  let dpr = 1;
+  const resize = () => {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    size = canvas.clientWidth;
+    canvas.width = canvas.height = Math.round(size * dpr);
+  };
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Unit vector for a lat/lon after spinning by `rot` and tilting the axis toward the viewer.
+  const vec = (lat, lon, rot) => {
+    const x = Math.cos(lat) * Math.sin(lon + rot);
+    const y = Math.sin(lat);
+    const z = Math.cos(lat) * Math.cos(lon + rot);
+    return [x, y * Math.cos(TILT) - z * Math.sin(TILT), y * Math.sin(TILT) + z * Math.cos(TILT)];
+  };
+
+  let running = false;
+  let start = performance.now();
+  let rotAtPause = 0.6;
+
+  function draw(now) {
+    if (!running) return;
+    const t = now - start;
+    const rot = rotAtPause + t * SPEED;
+    const s = size / 480; // the design was drawn on a 480px box
+    const c = 240 * s;
+    const R = 200 * s;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, size, size);
+
+    // Outer dotted ring.
+    ctx.strokeStyle = 'rgba(207,224,255,.45)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([1, 6]);
+    ctx.beginPath();
+    ctx.arc(c, c, R + 14 * s, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Sphere dots: the far side faintly, the near side brighter and bigger toward the viewer.
+    for (const [la, lo] of dots) {
+      const [x, y, z] = vec(la, lo, rot);
+      const front = z >= 0;
+      ctx.fillStyle = front ? `rgba(207,224,255,${(0.15 + z * 0.7).toFixed(3)})` : 'rgba(207,224,255,.06)';
+      ctx.beginPath();
+      ctx.arc(c + R * x, c - R * y, (front ? 0.8 + z * 1.5 : 0.7) * s, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Routes between cities: lifted arcs with a flowing dash, only when both ends face us.
+    const pts = cities.map(([la, lo]) => vec(la, lo, rot));
+    ctx.lineWidth = 1.4 * s;
+    ctx.setLineDash([2 * s, 4 * s]);
+    ctx.lineDashOffset = -t / 60;
+    for (const [a, b] of ROUTES) {
+      const p = pts[a];
+      const q = pts[b];
+      if (p[2] < 0.05 || q[2] < 0.05) continue;
+      const m = [p[0] + q[0], p[1] + q[1], p[2] + q[2]];
+      const len = Math.hypot(...m) || 1;
+      const lift = 1.28; // control point above the surface
+      ctx.strokeStyle = `rgba(240,140,99,${Math.min(p[2], q[2]).toFixed(2)})`;
+      ctx.beginPath();
+      ctx.moveTo(c + R * p[0], c - R * p[1]);
+      ctx.quadraticCurveTo(c + (R * lift * m[0]) / len, c - (R * lift * m[1]) / len, c + R * q[0], c - R * q[1]);
+      ctx.stroke();
+    }
+    ctx.setLineDash([]);
+
+    // City signals with a pulse.
+    pts.forEach(([x, y, z], i) => {
+      if (z < 0) return;
+      const px = c + R * x;
+      const py = c - R * y;
+      const phase = ((t / 3500 + i * 0.2) % 1 + 1) % 1;
+      ctx.fillStyle = `rgba(240,140,99,${(0.35 * (1 - phase) * z).toFixed(3)})`;
+      ctx.beginPath();
+      ctx.arc(px, py, (5 + phase * 16) * s, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = `rgba(240,140,99,${(0.4 + z * 0.6).toFixed(3)})`;
+      ctx.beginPath();
+      ctx.arc(px, py, 4.5 * s, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  // Only spin while the globe is on screen.
+  const io = new IntersectionObserver(([e]) => {
+    if (e.isIntersecting && !running) {
+      running = true;
+      start = performance.now();
+      requestAnimationFrame(draw);
+    } else if (!e.isIntersecting && running) {
+      running = false;
+      rotAtPause += (performance.now() - start) * SPEED;
+    }
+  });
+  io.observe(canvas);
+}
+
+spinningGlobe();
 globeParallax();
 loadTrends();
 loadStatus();
