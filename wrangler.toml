@@ -1,0 +1,25 @@
+# Cloudflare Workers config for the Titen website.
+# Build first (npm run cf:build), then: npx wrangler deploy
+name = "titen"
+main = "worker/index.js"
+compatibility_date = "2026-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "./worker/public"
+binding = "ASSETS"
+
+[vars]
+TITEN_MODEL = "anthropic/claude-haiku-5.5"
+# Google News blocks Cloudflare IPs: use publisher RSS feeds directly.
+TITEN_NEWS_SOURCE = "feeds"
+
+[observability]
+enabled = true
+
+# Shared cache (trends, briefs, TL;DRs). Created with: npx wrangler kv namespace create TITEN_CACHE
+[[kv_namespaces]]
+binding = "TITEN_CACHE"
+id = "0bb2d642cdda4fe3be4e2c8300f5bea0"
+
+# The OpenRouter key is a secret: npx wrangler secret put OPENROUTER_API_KEY

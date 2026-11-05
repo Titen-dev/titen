@@ -29,7 +29,10 @@
     "test": "node --test \"test/**/*.test.js\"",
     "start": "node web/server.js",
     "web": "node web/server.js --open",
-    "titen": "node cli/index.js"
+    "titen": "node cli/index.js",
+    "cf:build": "node scripts/build-worker.mjs",
+    "cf:dev": "node scripts/build-worker.mjs && npx --yes wrangler@4 dev",
+    "cf:deploy": "node scripts/build-worker.mjs && npx --yes wrangler@4 deploy"
   },
   "keywords": [
     "ai",

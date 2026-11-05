@@ -1,3 +1,4 @@
+import { Buffer } from 'node:buffer';
 import { TitenError, ErrorCodes } from './errors.js';
 
 export const BROWSER_UA =

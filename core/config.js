@@ -3,16 +3,23 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+// On runtimes without a real file system (Cloudflare Workers) these lookups may fail;
+// that's fine: config then comes only from environment variables.
+function projectRoot() {
+  try {
+    return path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+  } catch {
+    return '.';
+  }
+}
+export const ROOT = projectRoot();
 
 // A local .env (development) is loaded once. Real env vars always win.
-const envFile = path.join(ROOT, '.env');
-if (fs.existsSync(envFile)) {
-  try {
-    process.loadEnvFile(envFile);
-  } catch {
-    /* ignore malformed .env */
-  }
+try {
+  const envFile = path.join(ROOT, '.env');
+  if (typeof process.loadEnvFile === 'function' && fs.existsSync(envFile)) process.loadEnvFile(envFile);
+} catch {
+  /* no file system or malformed .env */
 }
 
 export const DEFAULT_MODEL = 'anthropic/claude-haiku-5.5';

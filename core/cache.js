@@ -3,38 +3,32 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 
 /**
- * Tiny file cache with TTL and single-flight:
+ * Cache with TTL and single-flight on top of any key/value storage:
  * concurrent callers asking for the same missing key share one generation.
+ *
+ * storage = { read(key) → { value, expires } | undefined, write(key, entry, ttlMs) }
+ * Built-in storages: files (CLI / Node server), memory, and Workers KV (see worker/).
  */
-export function createCache(dir) {
+export function createCacheWith(storage) {
   const inflight = new Map();
-  const fileFor = (key) => path.join(dir, `${crypto.createHash('sha1').update(key).digest('hex')}.json`);
-
-  async function get(key) {
-    try {
-      const entry = JSON.parse(await fs.readFile(fileFor(key), 'utf8'));
-      if (entry.expires > Date.now()) return entry.value;
-    } catch {
-      /* missing or corrupt → treat as miss */
-    }
-    return undefined;
-  }
 
   /** Stored entry even when expired: { value, expires } or undefined. Used for stale-while-revalidate. */
   async function peek(key) {
     try {
-      const entry = JSON.parse(await fs.readFile(fileFor(key), 'utf8'));
-      return { value: entry.value, expires: entry.expires };
+      const entry = await storage.read(key);
+      return entry ? { value: entry.value, expires: entry.expires } : undefined;
     } catch {
-      return undefined;
+      return undefined; // missing or corrupt → treat as miss
     }
   }
 
+  async function get(key) {
+    const entry = await peek(key);
+    return entry && entry.expires > Date.now() ? entry.value : undefined;
+  }
+
   async function set(key, value, ttlMs) {
-    await fs.mkdir(dir, { recursive: true });
-    const tmp = `${fileFor(key)}.${process.pid}.${Date.now()}.tmp`;
-    await fs.writeFile(tmp, JSON.stringify({ key, expires: Date.now() + ttlMs, value }));
-    await fs.rename(tmp, fileFor(key));
+    await storage.write(key, { key, expires: Date.now() + ttlMs, value }, ttlMs);
   }
 
   /** Returns { value, cached }. `refresh: true` skips the stored value (still single-flight). */
@@ -61,6 +55,37 @@ export function createCache(dir) {
   const isInflight = (key) => inflight.has(key);
 
   return { get, peek, set, getOrCreate, isInflight };
+}
+
+/** File-backed cache (one JSON file per key) for the CLI and the Node web server. */
+export function createCache(dir) {
+  const fileFor = (key) => path.join(dir, `${crypto.createHash('sha1').update(key).digest('hex')}.json`);
+  return createCacheWith({
+    async read(key) {
+      return JSON.parse(await fs.readFile(fileFor(key), 'utf8'));
+    },
+    async write(key, entry) {
+      await fs.mkdir(dir, { recursive: true });
+      const tmp = `${fileFor(key)}.${process.pid}.${Date.now()}.tmp`;
+      await fs.writeFile(tmp, JSON.stringify(entry));
+      await fs.rename(tmp, fileFor(key));
+    },
+  });
+}
+
+/** In-memory cache (lost on restart). */
+export function createMemoryCache(maxEntries = 500) {
+  const map = new Map();
+  return createCacheWith({
+    async read(key) {
+      return map.get(key);
+    },
+    async write(key, entry) {
+      map.delete(key);
+      map.set(key, entry);
+      if (map.size > maxEntries) map.delete(map.keys().next().value); // drop the oldest
+    },
+  });
 }
 
 /** Milliseconds until the next UTC midnight (used for "once per day" items). */

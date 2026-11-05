@@ -6,3 +6,9 @@ node_modules/
 
 # large or third-party reference material (not part of the product)
 *.mp4
+
+# Cloudflare build output
+worker/generated/
+worker/public/
+.wrangler/
+.dev.vars

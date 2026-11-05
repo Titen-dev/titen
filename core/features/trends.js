@@ -41,7 +41,7 @@ async function collectSignals(region, sources, signal) {
   const tasks = {};
   for (const geo of cfg.trends) tasks[`trends_${geo}`] = () => sources.trendingSearches(geo, { limit: region === 'global' ? 12 : 20, signal });
   for (const ed of cfg.news) tasks[`news_${ed}`] = () => sources.topStories({ region: ed, limit: region === 'global' ? 15 : 25, signal });
-  tasks.hn = () => sources.hnTopStories({ limit: 25, signal });
+  tasks.hn = () => sources.hnTopStories({ limit: 20, signal });
   tasks.github = () => sources.githubTrending({ limit: 12, signal });
 
   const { data, failed } = await gather(tasks);

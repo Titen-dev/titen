@@ -1,0 +1,5 @@
+<?xml version="1.0"?><rss version="2.0"><channel><title>Pub</title>
+<item><title><![CDATA[RSS story <i>one</i>]]></title><link>https://rss.example/1</link><pubDate>Thu, 05 Nov 2026 09:00:00 GMT</pubDate><description>Desc one</description></item>
+<item><title>No link here</title></item>
+<item><title>RSS story two</title><guid>https://rss.example/2</guid></item>
+</channel></rss>

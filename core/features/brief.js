@@ -47,8 +47,8 @@ function makeValidator(sources) {
   };
 }
 
-async function generate(topic, label, { usage, signal, config, sources }) {
-  let items = (await sources.searchNews(topic, { region: 'us', when: '2d', limit: 20, signal }).catch(() => [])).map((n) => ({
+async function generate(topic, label, topicId, { usage, signal, config, sources }) {
+  let items = (await sources.searchNews(topic, { region: 'us', when: '2d', limit: 20, signal, topicId }).catch(() => [])).map((n) => ({
     title: n.title,
     url: n.url,
     source: n.source,
@@ -102,9 +102,12 @@ export async function getBrief({ topic, topicId, refresh = false, signal, config
     if (query.length < 2) throw new TitenError(ErrorCodes.BAD_INPUT, 'Please give a topic, e.g. titen brief "electric cars".');
   }
 
+  // Known topics (also typed in the CLI, e.g. "AI") get curated publisher feeds as a fallback source.
+  const feedTopicId = topicId || WEB_TOPICS.find((t) => [t.id, t.label, t.query].map(normalizeTopic).includes(normalizeTopic(topic)))?.id;
+
   const usage = new Usage();
   const store = cache || createCache(config.cacheDir);
   const key = briefCacheKey(query);
-  const { value, cached } = await store.getOrCreate(key, msUntilUtcMidnight(), () => generate(query, label, { usage, signal, config, sources }), { refresh });
+  const { value, cached } = await store.getOrCreate(key, msUntilUtcMidnight(), () => generate(query, label, feedTopicId, { usage, signal, config, sources }), { refresh });
   return { ...value, cached, usage: usage.toJSON() };
 }

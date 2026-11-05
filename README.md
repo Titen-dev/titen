@@ -115,9 +115,11 @@ Environment variables for the server: `PORT` (default 3000), `HOST` (default 127
 
 ### Deploy
 
-- **Hugging Face Spaces** (free, no card): create a Docker Space, upload the two files in `deploy/huggingface/`, and add the secret `OPENROUTER_API_KEY`. The image pulls the latest code from this repository on every rebuild.
-- **Render**: `render.yaml` describes a free web service (Render may ask for a card to verify the account).
-- Anything that runs Node 20.12+ works: `NODE_ENV=production PORT=8080 node web/server.js`.
+- **Cloudflare Workers** (free, what titen runs on): `npm run cf:deploy` builds the pages into `worker/` and deploys with Wrangler. One-time setup: `npx wrangler kv namespace create TITEN_CACHE` (put the id in `wrangler.toml`) and `npx wrangler secret put OPENROUTER_API_KEY`. Google News blocks Cloudflare IPs, so the Worker uses curated publisher RSS feeds (`TITEN_NEWS_SOURCE=feeds`). Some big publishers (BBC, Reuters, NYT) also refuse server-side readers, so TL;DR shows a friendly "try another site" message for them.
+- **Vercel**: `api/index.js` + `vercel.json` run the same app as a serverless function.
+- **Hugging Face Spaces** (Docker, needs a paid plan): `deploy/huggingface/`.
+- **Render**: `render.yaml` (free web service; Render may ask for a card).
+- Anything that runs Node 20.12+: `NODE_ENV=production PORT=8080 node web/server.js`.
 
 ## Configuration
 

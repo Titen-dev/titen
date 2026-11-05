@@ -20,7 +20,16 @@ export async function readPage(input, { minWords = 80, signal } = {}) {
     throw new TitenError(ErrorCodes.UNREADABLE, `${u.hostname} needs a login or JavaScript, so Titen can't read it. Try a regular article link.`);
   }
 
-  const res = await fetchText(u, { signal });
+  let res;
+  try {
+    res = await fetchText(u, { signal });
+  } catch (e) {
+    // Many big publishers refuse automated readers coming from servers.
+    if (e.code === ErrorCodes.FETCH_FAILED && [401, 403, 429, 451, 503].includes(e.status)) {
+      throw new TitenError(ErrorCodes.UNREADABLE, `${u.hostname.replace(/^www\./, '')} doesn't allow automated readers like Titen. Try the same story from another site.`, { status: e.status });
+    }
+    throw e;
+  }
   const type = res.contentType;
   let title = '';
   let text = '';

@@ -1,5 +1,6 @@
 import { fetchText } from '../http.js';
 import { xmlItems, xmlTag } from '../text.js';
+import { searchFeeds, topStoriesFromFeeds } from './feeds.js';
 
 // Google News edition parameters per region.
 export const NEWS_EDITIONS = {
@@ -36,16 +37,34 @@ export function parseNewsRss(xml, limit = 20) {
     .filter((x) => x.title && x.url);
 }
 
-/** Search Google News. `when` like "1d" / "2d" / "7d" limits recency. */
-export async function searchNews(query, { region = 'us', limit = 15, when, signal } = {}) {
-  const q = when ? `${query} when:${when}` : query;
-  const edition = NEWS_EDITIONS[region] || NEWS_EDITIONS.us;
-  const { text } = await fetchText(`https://news.google.com/rss/search?q=${encodeURIComponent(q)}&${edition}`, { signal });
-  return parseNewsRss(text, limit);
+// TITEN_NEWS_SOURCE=feeds skips Google News entirely (it blocks data-centre IPs such as
+// Cloudflare Workers) and uses publisher feeds. Otherwise feeds are the automatic fallback.
+const feedsOnly = () => globalThis.process?.env?.TITEN_NEWS_SOURCE === 'feeds';
+
+/** Search Google News. `when` like "1d" / "2d" / "7d" limits recency. Falls back to publisher feeds. */
+export async function searchNews(query, { region = 'us', limit = 15, when, signal, topicId } = {}) {
+  if (feedsOnly()) return searchFeeds(query, { topicId, limit, signal });
+  try {
+    const q = when ? `${query} when:${when}` : query;
+    const edition = NEWS_EDITIONS[region] || NEWS_EDITIONS.us;
+    const { text } = await fetchText(`https://news.google.com/rss/search?q=${encodeURIComponent(q)}&${edition}`, { signal });
+    const items = parseNewsRss(text, limit);
+    if (items.length) return items;
+  } catch (e) {
+    if (signal?.aborted) throw e;
+  }
+  return searchFeeds(query, { topicId, limit, signal });
 }
 
 export async function topStories({ region = 'us', limit = 20, signal } = {}) {
-  const edition = NEWS_EDITIONS[region] || NEWS_EDITIONS.us;
-  const { text } = await fetchText(`https://news.google.com/rss?${edition}`, { signal });
-  return parseNewsRss(text, limit);
+  if (feedsOnly()) return topStoriesFromFeeds({ region, limit, signal });
+  try {
+    const edition = NEWS_EDITIONS[region] || NEWS_EDITIONS.us;
+    const { text } = await fetchText(`https://news.google.com/rss?${edition}`, { signal });
+    const items = parseNewsRss(text, limit);
+    if (items.length) return items;
+  } catch (e) {
+    if (signal?.aborted) throw e;
+  }
+  return topStoriesFromFeeds({ region, limit, signal });
 }
