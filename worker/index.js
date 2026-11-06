@@ -80,9 +80,14 @@ function respond(status, body, headers, extra = {}) {
 
 export default {
   async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+    // One canonical address: www.titenhq.com → titenhq.com (keeps path and query).
+    if (url.hostname.startsWith('www.')) {
+      url.hostname = url.hostname.slice(4);
+      return Response.redirect(url.toString(), 301);
+    }
     const { api, headers, setWaitUntil } = getApp(env);
     setWaitUntil((p) => ctx.waitUntil(p));
-    const url = new URL(request.url);
     const p = url.pathname.replace(/\/+$/, '') || '/';
 
     if (p.startsWith('/api/')) {

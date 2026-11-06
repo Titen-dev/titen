@@ -2,6 +2,8 @@
 
 **An AI agent that reads the signs of the world.**
 
+🌐 **[titenhq.com](https://titenhq.com)** · 📦 `npm install -g @titen-dev/titen`
+
 Titen is named after *ilmu titen*, the old Javanese art of reading signs and patterns through careful, patient observation. It watches what's happening and tells you what matters, in plain English.
 
 | Command | What it does |

@@ -102,3 +102,10 @@ test('KV cache shortens very long keys', async () => {
   assert.ok(key.length < 512);
   assert.deepEqual(await cache.get(`tldr:v1:https://example.com/${'x'.repeat(900)}`), { a: 1 });
 });
+
+test('www redirects to the bare domain, keeping path and query', async () => {
+  const e = env();
+  const r = await worker.fetch(new Request('https://www.titenhq.com/brief?x=1'), e, ctx());
+  assert.equal(r.status, 301);
+  assert.equal(r.headers.get('location'), 'https://titenhq.com/brief?x=1');
+});

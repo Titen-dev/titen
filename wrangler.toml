@@ -5,6 +5,15 @@ main = "worker/index.js"
 compatibility_date = "2026-09-01"
 compatibility_flags = ["nodejs_compat"]
 
+# Keep the free *.workers.dev address alive next to the own domain.
+workers_dev = true
+
+# Own domain (zone on Cloudflare). titen.autora.workers.dev keeps working too.
+routes = [
+  { pattern = "titenhq.com", custom_domain = true },
+  { pattern = "www.titenhq.com", custom_domain = true },
+]
+
 [assets]
 directory = "./worker/public"
 binding = "ASSETS"
