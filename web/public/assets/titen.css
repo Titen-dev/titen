@@ -459,3 +459,13 @@ html .reveal.is-visible { opacity: 1; transform: none; }
 
 /* Spinning globe (canvas drawn by home.js; the SVG stays as the still fallback). */
 .globe-canvas { width: 100%; max-width: 520px; aspect-ratio: 1; height: auto; display: block; margin: 0 auto; }
+
+/* Hero: the longer AI-agent headline gets a slightly smaller size; CLI install line like a terminal. */
+.hero .display { font-size: clamp(40px, 4.7vw, 64px); line-height: 1.04; }
+.hero .display em { display: block; margin-top: .06em; }
+.hero .display, .hero .display em { text-wrap: balance; }
+.cli-line { display: inline-flex; align-items: center; gap: 12px; margin-top: 22px; padding: 9px 10px 9px 16px; max-width: 100%; border: 1px solid var(--line); border-radius: 6px; background: rgba(10, 18, 40, .7); font: 400 14px/1.4 var(--f-mono); }
+.cli-line .cli-prompt { color: var(--green); }
+.cli-line code { background: none; border: 0; padding: 0; color: var(--text); font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hero-copy > .cli-line { animation-delay: .66s; }
+@media (max-width: 560px) { .hide-sm { display: none !important; } .cli-line { font-size: 12.5px; gap: 8px; padding-left: 12px; } .cli-line code { font-size: 12.5px; } }
