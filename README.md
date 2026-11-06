@@ -19,7 +19,7 @@ Every claim links to its source. Titen only cites sources it actually collected,
 Requires Node.js 20.12 or newer.
 
 ```bash
-npm install -g titen      # once published; for now: npm link (from this folder)
+npm install -g @titen-dev/titen   # the command is still: titen
 titen setup               # paste your OpenRouter API key
 ```
 

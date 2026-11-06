@@ -1,5 +1,5 @@
 {
-  "name": "titen",
+  "name": "@titen-dev/titen",
   "version": "0.1.0",
   "description": "An AI agent that reads the signs of the world: trend radar, daily briefs, TL;DR for any link, scam checks and page/topic watching.",
   "license": "MIT",
@@ -49,5 +49,7 @@
     "watch",
     "openrouter"
   ],
-  "private": true
+  "publishConfig": {
+    "access": "public"
+  }
 }
