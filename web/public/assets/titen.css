@@ -344,6 +344,15 @@ input:focus, textarea:focus { outline: none; border-color: var(--coral); box-sha
 .social { display: inline-flex; align-items: center; gap: 9px; min-height: 40px; padding: 0 16px; border: 1px solid var(--line); border-radius: 999px; font: 500 13px/1 var(--f-mono); letter-spacing: .02em; color: var(--text-2); text-decoration: none; transition: border-color .15s ease, color .15s ease; }
 .social svg { width: 15px; height: 15px; }
 .social:hover { border-color: var(--coral); color: var(--text); text-decoration: none; }
+.token-box { margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--line-soft); max-width: 470px; }
+.footer-about .token-box .token-line { margin: 10px 0 12px; font-size: 17px; }
+.token-line b { color: var(--text); font-weight: 500; }
+.copybox-ca { display: grid; grid-template-columns: 1fr auto; align-items: center; row-gap: 10px; width: 100%; padding: 12px 12px 14px 16px; }
+.copybox-ca .copybox-label { grid-column: 1; grid-row: 1; }
+.copybox-ca button { grid-column: 2; grid-row: 1; }
+.copybox-ca code { grid-column: 1 / -1; grid-row: 2; font-size: 14px; overflow-wrap: anywhere; }
+.footer-about .token-box .token-note { font: 400 12.5px/1.55 var(--f-mono); color: var(--muted); margin: 12px 0 0; }
+code.ca { overflow-wrap: anywhere; word-break: break-all; }
 .copybox-label { font: 500 12px var(--f-mono); color: var(--muted); letter-spacing: .1em; }
 .copybox code { background: none; border: 0; padding: 0; color: var(--coral); font-size: 14px; }
 .footer-links { display: flex; flex-direction: column; gap: 10px; font-size: 17px; }
@@ -535,3 +544,5 @@ html .reveal.is-visible { opacity: 1; transform: none; }
   .docs-toc a { border-left: 0; padding: 2px 0; }
   .doc-table td:first-child { white-space: normal; }
 }
+
+@media (max-width: 480px) { .copybox-ca code { font-size: 12.5px; letter-spacing: -.01em; } }
