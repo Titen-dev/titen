@@ -2,7 +2,7 @@
 
 **An AI agent that reads the signs of the world.**
 
-🌐 **[titenhq.com](https://titenhq.com)** · 📖 **[Docs](https://titenhq.com/docs)** · 📦 `npm install -g @titen-dev/titen`
+🌐 **[titenhq.com](https://titenhq.com)** · 📖 **[Docs](https://titenhq.com/docs)** · 𝕏 [@titenhq](https://x.com/titenhq) · 📦 `npm install -g @titen-dev/titen`
 
 Titen reads the signs of the world through careful, patient observation. It watches what's happening and tells you what matters, in plain English.
 

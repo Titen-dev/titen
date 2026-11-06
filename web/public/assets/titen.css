@@ -340,6 +340,10 @@ input:focus, textarea:focus { outline: none; border-color: var(--coral); box-sha
 .footer-grid { display: grid; grid-template-columns: 1.4fr .8fr 1.2fr; gap: 48px; }
 .footer-about p { color: var(--text-2); font-size: 17px; margin: 16px 0 22px; max-width: 420px; }
 .copybox { display: inline-flex; align-items: center; gap: 14px; border: 1px solid var(--line); background: rgba(10, 18, 40, .7); border-radius: 4px; padding: 10px 12px 10px 16px; max-width: 100%; }
+.socials { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.social { display: inline-flex; align-items: center; gap: 9px; min-height: 40px; padding: 0 16px; border: 1px solid var(--line); border-radius: 999px; font: 500 13px/1 var(--f-mono); letter-spacing: .02em; color: var(--text-2); text-decoration: none; transition: border-color .15s ease, color .15s ease; }
+.social svg { width: 15px; height: 15px; }
+.social:hover { border-color: var(--coral); color: var(--text); text-decoration: none; }
 .copybox-label { font: 500 12px var(--f-mono); color: var(--muted); letter-spacing: .1em; }
 .copybox code { background: none; border: 0; padding: 0; color: var(--coral); font-size: 14px; }
 .footer-links { display: flex; flex-direction: column; gap: 10px; font-size: 17px; }
@@ -522,10 +526,7 @@ html .reveal.is-visible { opacity: 1; transform: none; }
 .doc-table td:first-child { white-space: nowrap; color: var(--text); }
 .doc-table code { white-space: nowrap; }
 .doc-table td:nth-child(n+3) { white-space: nowrap; }
-.site-nav .nav-gh { display: inline-flex; align-items: center; gap: 7px; }
-.site-nav .nav-gh svg { width: 16px; height: 16px; }
 @media (max-width: 1100px) { .site-nav { gap: 20px; } }
-@media (max-width: 1020px) { .site-nav .nav-gh span { display: none; } }
 @media (max-width: 960px) {
   .docs-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .doc-table { display: block; overflow-x: auto; }
@@ -534,4 +535,3 @@ html .reveal.is-visible { opacity: 1; transform: none; }
   .docs-toc a { border-left: 0; padding: 2px 0; }
   .doc-table td:first-child { white-space: normal; }
 }
-@media (max-width: 860px) { .site-nav .nav-gh span { display: inline; } }
