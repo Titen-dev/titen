@@ -12,3 +12,6 @@ worker/generated/
 worker/public/
 .wrangler/
 .dev.vars
+
+# Design drafts (local only)
+brand/

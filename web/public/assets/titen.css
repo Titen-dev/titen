@@ -1,4 +1,4 @@
-/* Titen · Night Console. Deep nila night, coral signals, serif headlines, monospace data. */
+/* Titen · Night Console. Deep indigo night, coral signals, serif headlines, monospace data. */
 
 :root {
   --bg: #0d1630;
@@ -297,14 +297,45 @@ input:focus, textarea:focus { outline: none; border-color: var(--coral); box-sha
 .about-art { position: sticky; top: 100px; }
 .about-art-inner { background: linear-gradient(180deg, var(--card), var(--bg-2)); border: 1px solid var(--line); border-radius: 12px; padding: 30px; text-align: center; }
 .about-art-inner p { font: 500 11px/1.5 var(--f-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin: 10px 0 0; }
-.waluku { width: 100%; height: auto; display: block; color: #e9e6dd; }
-.waluku .w-line, .waluku .w-line circle, .waluku .w-line path { fill: none; stroke: currentColor; stroke-width: 1; }
-.waluku .w-label { fill: currentColor; opacity: .6; font: 500 10px var(--f-mono); letter-spacing: .08em; }
-.waluku .w-dots { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-dasharray: .5 6; stroke-linecap: round; opacity: .5; }
-.waluku .w-const line { stroke: currentColor; stroke-width: .9; opacity: .5; }
-.waluku .w-plough line { stroke: var(--coral); stroke-width: 1.5; }
-.waluku .w-star circle { fill: currentColor; }
-.waluku .w-accent circle { fill: var(--coral); }
+/* About art: a radar dial. The sweep turns every 8s and each star pings as it passes
+   (sky.svg puts every halo in one of 24 delay slots, 15° apart). */
+.sky { width: 100%; height: auto; display: block; color: #e9e6dd; overflow: visible; }
+.sky .s-line, .sky .s-line circle, .sky .s-line path { fill: none; stroke: currentColor; stroke-width: 1; }
+.sky .s-label { fill: currentColor; opacity: .6; font: 500 10px var(--f-mono); letter-spacing: .08em; }
+.sky .s-dots { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-dasharray: .5 6; stroke-linecap: round; opacity: .5; }
+.sky .s-const line { stroke: currentColor; stroke-width: .9; opacity: .5; }
+.sky .s-belt line { stroke: var(--coral); stroke-width: 1.5; }
+.sky .s-core { fill: currentColor; }
+.sky .s-halo { fill: currentColor; opacity: .12; }
+.sky .s-accent circle { fill: var(--coral); }
+.sky .s-sweep line { stroke: var(--coral); stroke-width: 1.2; opacity: .75; }
+.sky .s-comet { fill: var(--coral); }
+.sky .s-comet-b { fill: currentColor; opacity: .8; }
+.sky .s-pulse circle { fill: none; stroke: var(--coral); stroke-width: 1.2; opacity: 0; }
+
+.sky .s-sweep { transform-box: view-box; transform-origin: 240px 240px; animation: sky-turn 8s linear infinite; }
+.sky .s-ring { transform-box: view-box; transform-origin: 240px 240px; animation: sky-turn 90s linear infinite reverse; }
+.sky .s-flow { animation: sky-flow 3s linear infinite; }
+.sky .s-flow.s-rev { animation-duration: 4.5s; animation-direction: reverse; }
+.sky .s-halo { transform-box: fill-box; transform-origin: center; animation: sky-ping 8s ease-out infinite backwards; }
+.sky .a0 { animation-delay: 0.00s; } .sky .a1 { animation-delay: 0.33s; } .sky .a2 { animation-delay: 0.67s; } .sky .a3 { animation-delay: 1.00s; } .sky .a4 { animation-delay: 1.33s; } .sky .a5 { animation-delay: 1.67s; } .sky .a6 { animation-delay: 2.00s; } .sky .a7 { animation-delay: 2.33s; } .sky .a8 { animation-delay: 2.67s; } .sky .a9 { animation-delay: 3.00s; } .sky .a10 { animation-delay: 3.33s; } .sky .a11 { animation-delay: 3.67s; } .sky .a12 { animation-delay: 4.00s; } .sky .a13 { animation-delay: 4.33s; } .sky .a14 { animation-delay: 4.67s; } .sky .a15 { animation-delay: 5.00s; } .sky .a16 { animation-delay: 5.33s; } .sky .a17 { animation-delay: 5.67s; } .sky .a18 { animation-delay: 6.00s; } .sky .a19 { animation-delay: 6.33s; } .sky .a20 { animation-delay: 6.67s; } .sky .a21 { animation-delay: 7.00s; } .sky .a22 { animation-delay: 7.33s; } .sky .a23 { animation-delay: 7.67s; }
+.sky .s-core { animation: sky-twinkle 3.2s ease-in-out infinite; }
+.sky .s-core.t1 { animation-duration: 4.4s; animation-delay: -1.3s; }
+.sky .s-core.t2 { animation-duration: 5.6s; animation-delay: -2.7s; }
+.sky .s-const line, .sky .s-belt line { stroke-dasharray: 1; animation: sky-draw 1.6s cubic-bezier(.6,0,.2,1) .2s both; }
+.sky .s-belt line { animation: sky-draw 1.2s cubic-bezier(.6,0,.2,1) 1.2s both, sky-glow 3s ease-in-out 2.4s infinite; }
+.sky .s-pulse circle { transform-box: fill-box; transform-origin: center; animation: sky-pulse 3s ease-out 1.8s infinite; }
+.sky .s-pulse circle + circle { animation-delay: 3.3s; }
+.about-art-inner:hover .sky .s-sweep { animation-duration: 4s; }
+
+@keyframes sky-turn { to { transform: rotate(360deg); } }
+@keyframes sky-flow { to { stroke-dashoffset: -13; } }
+@keyframes sky-ping { 0% { transform: scale(1); opacity: .12; } 3% { transform: scale(2.3); opacity: .55; } 22% { transform: scale(1.2); opacity: .14; } 100% { transform: scale(1); opacity: .12; } }
+@keyframes sky-twinkle { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+@keyframes sky-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes sky-glow { 0%, 100% { stroke-width: 1.5; opacity: 1; } 50% { stroke-width: 2.6; opacity: .7; } }
+@keyframes sky-pulse { 0% { transform: scale(.6); opacity: .8; } 100% { transform: scale(5.5); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .sky .s-comet, .sky .s-pulse { display: none; } }
 
 /* ---------- footer ---------- */
 .site-footer { border-top: 1px solid rgba(255, 255, 255, .07); padding: 64px 0 80px; background: rgba(8, 14, 32, .55); }

@@ -4,7 +4,7 @@
 
 🌐 **[titenhq.com](https://titenhq.com)** · 📖 **[Docs](https://titenhq.com/docs)** · 📦 `npm install -g @titen-dev/titen`
 
-Titen is named after *ilmu titen*, the old Javanese art of reading signs and patterns through careful, patient observation. It watches what's happening and tells you what matters, in plain English.
+Titen reads the signs of the world through careful, patient observation. It watches what's happening and tells you what matters, in plain English.
 
 | Command | What it does |
 |---|---|
@@ -94,7 +94,7 @@ How it works:
 
 ## Website
 
-The same four features run as a public website: English only, no login, a dark "Night Console" design (deep nila, coral signals, serif headlines, monospace data). Trends on the web are global only.
+The same four features run as a public website: English only, no login, a dark "Night Console" design (deep indigo, coral signals, serif headlines, monospace data). Trends on the web are global only.
 
 ```bash
 npm start            # http://localhost:3000
@@ -109,7 +109,7 @@ On Windows you can also double-click **Start Titen.bat**.
 | `/brief` | Daily Brief for up to 6 of 20 fixed topics (choice saved in the browser) |
 | `/tldr` | TL;DR for a link |
 | `/scam` | Scam Check with text, link or screenshot (resized in the browser, never stored) |
-| `/about` | The story of ilmu titen, limits, privacy |
+| `/about` | The idea behind Titen, limits, privacy |
 
 The website runs on the owner's OpenRouter key (`OPENROUTER_API_KEY`). Protection is deliberately light: about one request per 5 seconds per visitor (small bursts allowed), same-origin JSON only, a 5 MB image cap, strict security headers, and no logging of what people paste. Trend Radar is shared by everyone and refreshed at most every 6 hours (stale results are shown instantly while a fresh scan runs in the background); each brief is written once per topic per day. Set a spending limit on the key in the OpenRouter dashboard as an emergency brake.
 

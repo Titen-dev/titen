@@ -14,7 +14,7 @@ const pkg = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.ur
 const HELP = {
   main: `
 ${c.coral(c.bold('titen'))} ${c.dim(`v${pkg.version}`)} — an AI agent that reads the signs of the world
-${c.dim('Named after "ilmu titen", the Javanese art of reading signs through careful observation.')}
+${c.dim('Reads the signs of the world through careful observation.')}
 
 ${c.bold('Usage')}
   titen <command> [options]

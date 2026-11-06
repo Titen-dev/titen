@@ -69,7 +69,7 @@ export function renderPages(versions = assetVersions()) {
     footer: read('partials/footer.html'),
     mark: read('partials/mark.svg'),
     globe: read('partials/globe.svg'),
-    waluku: read('partials/waluku.svg'),
+    sky: read('partials/sky.svg'),
   };
   // Partials may contain partials (header → mark), so expand until nothing changes.
   const fill = (s) => {

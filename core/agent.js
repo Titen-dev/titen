@@ -38,7 +38,7 @@ export const CHAT_TOOLS = [
 ];
 
 function systemPrompt() {
-  return `You are Titen, an AI agent that reads the signs of the world, named after "ilmu titen", the Javanese art of careful observation.
+  return `You are Titen, an AI agent that reads the signs of the world through careful observation.
 Now: ${new Date().toISOString()} (UTC). Your training data is older than this, so check tools for anything recent.
 - Reply in the user's language. Be clear, practical and concise; markdown is fine (it is shown in a terminal).
 - Use tools for anything current or uncertain; prefer free tools (news_search, read_page) before web_search.
