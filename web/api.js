@@ -9,7 +9,7 @@ import { utcDate } from '../core/cache.js';
 
 // The website shows global trends only (per-country views stay in the CLI).
 export const WEB_REGIONS = ['global'];
-export const PAGES = { '/': 'index', '/brief': 'brief', '/tldr': 'tldr', '/scam': 'scam', '/about': 'about' };
+export const PAGES = { '/': 'index', '/brief': 'brief', '/tldr': 'tldr', '/scam': 'scam', '/about': 'about', '/docs': 'docs' };
 export const MAX_BODY = 7_500_000; // a 5 MB image is ~6.7 MB as base64
 
 /**

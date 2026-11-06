@@ -1,0 +1,161 @@
+<!--meta title="Docs · Titen" description="How to use Titen on the web and in your terminal: install the CLI, every command, Watch, configuration, privacy and self-hosting." -->
+<section class="page-head">
+  <div class="wrap">
+    <div class="eyebrow"><span class="eyebrow-label">Docs</span><span class="eyebrow-rule"></span><span class="eyebrow-note">Web + CLI</span></div>
+    <h1 class="display-2">How Titen works, <em>and how to use it.</em></h1>
+    <p class="section-lede">Everything you need to use Titen in your browser or your terminal, configure it, and run your own copy. The source code is open on <a href="https://github.com/Titen-dev/titen" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+    <div class="doc-links">
+      <a class="btn btn-accent" href="https://github.com/Titen-dev/titen" target="_blank" rel="noopener noreferrer">View on GitHub ↗</a>
+      <a class="btn btn-outline" href="https://www.npmjs.com/package/@titen-dev/titen" target="_blank" rel="noopener noreferrer">npm package ↗</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section-tight">
+  <div class="wrap docs-grid">
+    <nav class="docs-toc" aria-label="On this page">
+      <span class="eyebrow-label">On this page</span>
+      <a href="#overview">Overview</a>
+      <a href="#web">Using the website</a>
+      <a href="#install">Install the CLI</a>
+      <a href="#commands">CLI commands</a>
+      <a href="#watch">Watch</a>
+      <a href="#config">Configuration</a>
+      <a href="#costs">Costs</a>
+      <a href="#privacy">Privacy &amp; limits</a>
+      <a href="#self-host">Self-hosting</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://github.com/Titen-dev/titen" target="_blank" rel="noopener noreferrer" class="toc-out">GitHub ↗</a>
+    </nav>
+
+    <article class="prose docs">
+      <h2 id="overview">Overview</h2>
+      <p>Titen is an AI agent that reads the world's signals and tells you what matters, with every source attached. It has five abilities:</p>
+      <table class="doc-table">
+        <thead><tr><th>Feature</th><th>What it does</th><th>Web</th><th>CLI</th></tr></thead>
+        <tbody>
+          <tr><td><b>Trend Radar</b></td><td>The most important stories right now, from Google Trends, news feeds, Hacker News and GitHub</td><td>✓ global</td><td>✓ any region</td></tr>
+          <tr><td><b>Daily Brief</b></td><td>The last ~48 hours of news on a topic, in a few lines with sources</td><td>✓ 20 topics</td><td>✓ any topic</td></tr>
+          <tr><td><b>TL;DR</b></td><td>The point, key facts and what's missing from any readable page</td><td>✓</td><td>✓</td></tr>
+          <tr><td><b>Scam Check</b></td><td>Is a message, link or screenshot a scam? Verdict, red flags, next steps</td><td>✓</td><td>✓</td></tr>
+          <tr><td><b>Watch</b></td><td>Watch a page or topic and get a desktop notification when it really changes</td><td>–</td><td>✓</td></tr>
+        </tbody>
+      </table>
+      <p>Summaries are written by an AI model through <a href="https://openrouter.ai" target="_blank" rel="noopener noreferrer">OpenRouter</a>. Titen only cites sources it actually collected, so it can't invent links.</p>
+
+      <h2 id="web">Using the website</h2>
+      <p>No account or install needed. Open <a href="/">titenhq.com</a> and:</p>
+      <ul>
+        <li><b><a href="/">Radar</a></b> shows the stories the world is watching, refreshed every few hours.</li>
+        <li><b><a href="/brief">Brief</a></b>: pick up to six topics. Your choice stays in your browser.</li>
+        <li><b><a href="/tldr">TL;DR</a></b>: paste a link to an article.</li>
+        <li><b><a href="/scam">Scam Check</a></b>: paste a message, a link, or drop a screenshot. Links are analyzed but never opened.</li>
+      </ul>
+
+      <h2 id="install">Install the CLI</h2>
+      <p>You need <a href="https://nodejs.org" target="_blank" rel="noopener noreferrer">Node.js</a> 20.12 or newer and an <a href="https://openrouter.ai/keys" target="_blank" rel="noopener noreferrer">OpenRouter API key</a> (the CLI uses your own key and credit).</p>
+      <div class="code"><pre><code data-copy-source>npm install -g @titen-dev/titen</code></pre><button type="button" class="btn-ghost btn-small" data-copy>copy</button></div>
+      <div class="code"><pre><code data-copy-source>titen setup</code></pre><button type="button" class="btn-ghost btn-small" data-copy>copy</button></div>
+      <p><code>titen setup</code> checks your key with OpenRouter and saves it to <code>~/.titen/config.json</code>. Then try:</p>
+      <div class="code"><pre><code data-copy-source>titen trends</code></pre><button type="button" class="btn-ghost btn-small" data-copy>copy</button></div>
+
+      <h2 id="commands">CLI commands</h2>
+
+      <h3>titen trends</h3>
+      <p>The 8–10 most important stories right now. Cached for 6 hours.</p>
+      <div class="code"><pre><code data-copy-source>titen trends --region gb</code></pre><button type="button" class="btn-ghost btn-small" data-copy>copy</button></div>
+      <p>Regions: <code>global</code> (default), <code>us</code>, <code>gb</code>, <code>in</code>, <code>ca</code>, <code>au</code>, <code>br</code>, <code>de</code>, <code>fr</code>, <code>jp</code>, <code>id</code>, <code>ng</code>, <code>sg</code>. Add <code>--refresh</code> to rebuild now.</p>
+
+      <h3>titen brief</h3>
+      <p>A short digest of the last ~48 hours on any topic. Cached per topic per day.</p>
+      <div class="code"><pre><code data-copy-source>titen brief "electric cars"</code></pre><button type="button" class="btn-ghost btn-small" data-copy>copy</button></div>
+      <p><code>titen brief --list</code> shows suggested topics.</p>
+
+      <h3>titen tldr</h3>
+      <p>TL;DR, key points and "what's missing" for a page. Cached for 24 hours.</p>
+      <div class="code"><pre><code data-copy-source>titen tldr https://en.wikipedia.org/wiki/Orion%27s_Belt</code></pre><button type="button" class="btn-ghost btn-small" data-copy>copy</button></div>
+
+      <h3>titen scam</h3>
+      <p>Checks a message, link or screenshot. Links are checked (domain age, look-alike names, shorteners) but never opened.</p>
+      <div class="code"><pre><code data-copy-source>titen scam "Your parcel is on hold, pay $1.99 at dhl-redelivery.top"</code></pre><button type="button" class="btn-ghost btn-small" data-copy>copy</button></div>
+      <div class="code"><pre><code data-copy-source>titen scam --url paypa1-secure.com
+titen scam --image ./screenshot.png</code></pre><button type="button" class="btn-ghost btn-small" data-copy>copy</button></div>
+      <p>You can also pipe text in, for example <code>pbpaste | titen scam</code>.</p>
+
+      <h3>titen chat</h3>
+      <p>Free conversation. Titen searches news and the web, reads pages, and uses the tools above by itself. In chat: <code>/new</code>, <code>/cost</code>, <code>/exit</code>.</p>
+
+      <h3>Options for every command</h3>
+      <table class="doc-table">
+        <tbody>
+          <tr><td><code>--json</code></td><td>Raw JSON output (for scripts)</td></tr>
+          <tr><td><code>--model &lt;id&gt;</code></td><td>Any OpenRouter model with tool support, e.g. <code>anthropic/claude-sonnet-5.5</code></td></tr>
+          <tr><td><code>--refresh</code></td><td>Skip the cache</td></tr>
+          <tr><td><code>--no-color</code></td><td>Plain output</td></tr>
+          <tr><td><code>-h</code>, <code>--help</code></td><td>Help for a command</td></tr>
+          <tr><td><code>-v</code>, <code>--version</code></td><td>Show the version</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="watch">Watch</h2>
+      <p>Keep an eye on a page (price, stock, an announcement) or a news topic. Titen strips noise like clocks, dates and view counters, and only asks the AI when the content really changed, so quiet days cost nothing.</p>
+      <div class="code"><pre><code data-copy-source>titen watch add https://store.example.com/product/123 --every 1h --note "price or stock"
+titen watch add "GTA 6 release" --every 6h
+titen watch daemon</code></pre><button type="button" class="btn-ghost btn-small" data-copy>copy</button></div>
+      <table class="doc-table">
+        <tbody>
+          <tr><td><code>watch add &lt;url | "topic"&gt;</code></td><td><code>--every</code> 15m minimum (default 6h), <code>--note</code> what counts as news for you</td></tr>
+          <tr><td><code>watch list</code></td><td>All watches and when they run next</td></tr>
+          <tr><td><code>watch remove &lt;id&gt;</code></td><td>Stop watching</td></tr>
+          <tr><td><code>watch run [--force]</code></td><td>Check what's due once, then exit (good for schedulers)</td></tr>
+          <tr><td><code>watch daemon</code></td><td>Keep running and check on schedule</td></tr>
+          <tr><td><code>watch log [&lt;id&gt;]</code></td><td>Recent changes Titen found</td></tr>
+          <tr><td><code>watch test</code></td><td>Show a test desktop notification</td></tr>
+        </tbody>
+      </table>
+      <p>To check in the background, schedule <code>titen watch run</code> every 15 minutes: Task Scheduler on Windows, launchd on macOS, cron on Linux. The <a href="https://github.com/Titen-dev/titen#run-it-automatically" target="_blank" rel="noopener noreferrer">README on GitHub</a> has ready-made commands.</p>
+
+      <h2 id="config">Configuration</h2>
+      <p><code>titen setup</code> writes <code>~/.titen/config.json</code>. Environment variables override it:</p>
+      <table class="doc-table">
+        <tbody>
+          <tr><td><code>OPENROUTER_API_KEY</code></td><td>Your OpenRouter key</td></tr>
+          <tr><td><code>TITEN_MODEL</code></td><td>Model id (default <code>anthropic/claude-haiku-5.5</code>)</td></tr>
+          <tr><td><code>TITEN_SEARCH_ENGINE</code></td><td>Web search engine: <code>exa</code> (default), <code>parallel</code>, <code>perplexity</code>, <code>native</code></td></tr>
+          <tr><td><code>TITEN_HOME</code></td><td>Where config, cache and watches live (default <code>~/.titen</code>)</td></tr>
+          <tr><td><code>TITEN_NEWS_SOURCE=feeds</code></td><td>Use publisher RSS feeds instead of Google News</td></tr>
+          <tr><td><code>TITEN_NOTIFY=0</code></td><td>Turn off desktop notifications for Watch</td></tr>
+          <tr><td><code>TITEN_PLAIN_LINKS=1</code></td><td>Print full URLs instead of clickable terminal links</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="costs">Costs</h2>
+      <p>The website is free to use. The CLI runs on your own OpenRouter credit; with the default model most commands cost a fraction of a cent, and every command prints its cost. Results are cached (trends 6 hours, briefs once per topic per day, TL;DRs 24 hours), and a paid web search (about $0.007) is only used when free sources aren't enough.</p>
+
+      <h2 id="privacy">Privacy &amp; limits</h2>
+      <ul>
+        <li>No account and no tracking cookies on the website. Messages and screenshots are sent to the AI model to produce an answer and are not stored.</li>
+        <li>Suspicious links are never opened; Titen only looks up public information about the domain.</li>
+        <li>Some publishers (for example BBC, Reuters, NYT) don't allow automated readers. TL;DR tells you so; try the same story from another site.</li>
+        <li>Pages behind logins (X, TikTok, Instagram, Facebook) or paywalls can't be read.</li>
+        <li>Titen is an AI and can be wrong. Treat it as a careful first look, not the final word.</li>
+      </ul>
+
+      <h2 id="self-host">Self-hosting</h2>
+      <p>Titen is MIT-licensed. Run your own copy from the <a href="https://github.com/Titen-dev/titen" target="_blank" rel="noopener noreferrer">GitHub repository</a>:</p>
+      <div class="code"><pre><code data-copy-source>git clone https://github.com/Titen-dev/titen.git
+cd titen
+npm test
+npm start</code></pre><button type="button" class="btn-ghost btn-small" data-copy>copy</button></div>
+      <p><code>npm start</code> serves the website on <code>http://localhost:3000</code> (put your key in <code>.env</code> as <code>OPENROUTER_API_KEY</code>). To deploy on Cloudflare Workers like titenhq.com, run <code>npm run cf:deploy</code> after creating a KV namespace and setting the key as a secret; details are in the README.</p>
+
+      <h2 id="faq">FAQ</h2>
+      <h3>Why "Titen"?</h3>
+      <p>It comes from <em>titen</em>, the Javanese art of reading signs through patient observation. <a href="/about">Read the story.</a></p>
+      <h3>Which AI model does it use?</h3>
+      <p>By default <code>anthropic/claude-haiku-5.5</code> through OpenRouter. The CLI accepts any OpenRouter model with tool support via <code>--model</code> or <code>TITEN_MODEL</code>.</p>
+      <h3>Found a bug or have an idea?</h3>
+      <p>Open an issue on <a href="https://github.com/Titen-dev/titen/issues" target="_blank" rel="noopener noreferrer">GitHub</a>. Pull requests are welcome.</p>
+    </article>
+  </div>
+</section>

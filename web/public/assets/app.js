@@ -123,7 +123,7 @@ function initHeader() {
 function initCopy() {
   $$('[data-copy]').forEach((btn) => {
     btn.addEventListener('click', async () => {
-      const text = btn.parentElement.querySelector('[data-copy-source]')?.textContent || '';
+      const text = (btn.parentElement.querySelector('[data-copy-source]')?.textContent || '').trim();
       try {
         await navigator.clipboard.writeText(text);
         btn.textContent = 'copied';
